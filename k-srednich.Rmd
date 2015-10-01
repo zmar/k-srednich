@@ -3,10 +3,10 @@ title: "k-srednich"
 author: "Zbyszek"
 date: "1 października 2015 r."
 output:
+  pdf_document:
+    toc: yes
   html_document:
     theme: united
-    toc: yes
-  pdf_document:
     toc: yes
 ---
 
@@ -21,7 +21,7 @@ plot(x,y, lwd=3, cex=2)
 points(0,0, pch=15, col="red3", cex=2)
 ```
 
-# Zastosowanie k-srednich do rysowania okręgów względem wybranego środka
+# Zastosowanie k-srednich do rysowania okręgów względem wybranego środka - 4 skupienia
 
 ```{r, fig.height=6, fig.width=6}
 odleglosc<-sqrt((x)^2+(y)^2)
@@ -41,7 +41,7 @@ skupienia$centers
 ```
 
 
-# Zastosowanie k-srednich do rysowania okręgów (z przesunięciem)
+# Zastosowanie k-srednich do rysowania okręgów (z przesunięciem) - 4 skupienia
 
 Przesunięcie o 1 obu współrzędnych
 
@@ -63,7 +63,7 @@ Prezentacja skupień
 skupienia$centers
 ```
 
-# Wykres 3D (bez przesunięcia)
+# Wykres 3D (bez przesunięcia) - 4 skupienia
 
 ```{r, fig.height=6, fig.width=6}
 # 3D Scatterplot
@@ -80,7 +80,7 @@ wykres3d$points3d(0 , 0, 0, pch=15, col="black")
 
 ```
 
-# Wykres 3D obrotowy (bez przesunięcia)
+# Wykres 3D obrotowy (bez przesunięcia) - 4 skupienia
 
 __Żeby wyświetlić trzeba uruchomić w R!__
 
