@@ -1,0 +1,97 @@
+---
+title: "k-srednich"
+author: "Zbyszek"
+date: "1 października 2015 r."
+output:
+  html_document:
+    theme: united
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+
+# Dane (na czerwono zaznaczono środek)
+
+```{r, fig.height=6, fig.width=6}
+set.seed(011015)
+x<-rnorm(500)
+y<-rnorm(500)
+plot(x,y, lwd=3, cex=2)
+points(0,0, pch=15, col="red3", cex=2)
+```
+
+# Zastosowanie k-srednich do rysowania okręgów względem wybranego środka
+
+```{r, fig.height=6, fig.width=6}
+odleglosc<-sqrt((x)^2+(y)^2)
+skupienia<-kmeans(odleglosc, 4) # k-srednich
+plot(x,y, lwd=3, cex=2, col="transparent")
+points(x[skupienia$cluster==1] , y[skupienia$cluster==1], col="red", pch=20)
+points(x[skupienia$cluster==2] , y[skupienia$cluster==2], col="green3", pch=20)
+points(x[skupienia$cluster==3] , y[skupienia$cluster==3], col="navyblue", pch=20)
+points(x[skupienia$cluster==4] , y[skupienia$cluster==4], col="orange", pch=20)
+points(0,0, pch=15, col="red3", cex=2)
+```
+
+Prezentacja skupień
+
+```{r }
+skupienia$centers
+```
+
+
+# Zastosowanie k-srednich do rysowania okręgów (z przesunięciem)
+
+Przesunięcie o 1 obu współrzędnych
+
+```{r, fig.height=6, fig.width=6}
+odleglosc<-sqrt((x+1)^2+(y+1)^2)# przesunięcie o 1 obu współrzędnych
+skupienia<-kmeans(odleglosc, 4) # k-srednich
+plot(x,y, lwd=3, cex=2, col="transparent")
+points(x[skupienia$cluster==1] , y[skupienia$cluster==1], col="red", pch=20)
+points(x[skupienia$cluster==2] , y[skupienia$cluster==2], col="green3", pch=20)
+points(x[skupienia$cluster==3] , y[skupienia$cluster==3], col="navyblue", pch=20)
+points(x[skupienia$cluster==4] , y[skupienia$cluster==4], col="orange", pch=20)
+points(-1,-1, pch=15, col="red3", cex=2)
+```
+
+
+Prezentacja skupień
+
+```{r }
+skupienia$centers
+```
+
+# Wykres 3D (bez przesunięcia)
+
+```{r, fig.height=6, fig.width=6}
+# 3D Scatterplot
+library(scatterplot3d)
+
+odleglosc<-sqrt((x)^2+(y)^2)# przesunięcie o 1 obu współrzędnych
+skupienia<-kmeans(odleglosc, 4) # k-srednich
+wykres3d<-scatterplot3d(x,y, odleglosc, main="Segmentacja 3D", color = "transparent")
+wykres3d$points3d(x[skupienia$cluster==1] , y[skupienia$cluster==1], odleglosc[skupienia$cluster==1], pch=20, col="red3")
+wykres3d$points3d(x[skupienia$cluster==2] , y[skupienia$cluster==2], odleglosc[skupienia$cluster==2], pch=20, col="green3")
+wykres3d$points3d(x[skupienia$cluster==3] , y[skupienia$cluster==3], odleglosc[skupienia$cluster==3], pch=20, col="navyblue")
+wykres3d$points3d(x[skupienia$cluster==4] , y[skupienia$cluster==4], odleglosc[skupienia$cluster==4], pch=20, col="orange")
+wykres3d$points3d(0 , 0, 0, pch=15, col="black")
+
+```
+
+# Wykres 3D obrotowy (bez przesunięcia)
+
+__Żeby wyświetlić trzeba uruchomić w R!__
+
+```{r, fig.height=6, fig.width=6}
+# 3D Scatterplot
+library(rgl)
+
+plot3d(x,y, odleglosc, main="Segmentacja 3D")
+# points3d(x[skupienia$cluster==1] , y[skupienia$cluster==1], odleglosc[skupienia$cluster==1], pch=20)
+# points3d(x[skupienia$cluster==2] , y[skupienia$cluster==2], odleglosc[skupienia$cluster==2], pch=20, col="green3")
+# points3d(x[skupienia$cluster==3] , y[skupienia$cluster==3], odleglosc[skupienia$cluster==3], pch=20, col="navyblue")
+# points3d(x[skupienia$cluster==4] , y[skupienia$cluster==4], odleglosc[skupienia$cluster==4], pch=20, col="orange")
+```
+
